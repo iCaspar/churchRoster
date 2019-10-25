@@ -1,0 +1,47 @@
+{
+  "name": "icaspar/churchroster",
+  "description": "Church Roster App",
+  "type": "app",
+  "keywords": [
+    "Church",
+    "Membership"
+  ],
+  "homepage": "https://caspar.green/church-roster",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Caspar Green",
+      "email": "cg@caspar.green"
+    }
+  ],
+  "require": {
+    "php": "^7.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8",
+    "squizlabs/php_codesniffer": "^3",
+    "phpdocumentor/phpdocumentor": "^2",
+    "roave/security-advisories": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {"ChurchRoster\\": "src/"}
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ChurchRoster\\Tests\\Unit\\": "tests/phpunit/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "config": {
+    "sort-order": true
+  },
+  "minimum-stability": "dev",
+  "scripts": {
+    "sniff": "\"vendor/bin/phpcs\"",
+    "unit": "\"vendor/bin/phpunit\" --testsuite unit --color=always"
+  }
+}

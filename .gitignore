@@ -1,0 +1,19 @@
+# .gitignore
+
+# OSX files
+.DS_Store
+
+# PHPStorm
+/*/.idea/
+
+# 3rd Party Packages
+app/node_modules/
+app/vendor/
+
+# PHPUnit
+.phpunit.*
+
+# Other
+/logs/
+/reports/
+/root/
