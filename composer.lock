@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6312b979602bfd2396edabae70268a44",
+    "content-hash": "28d677ab486fff1dfc697c3e6bf3d721",
     "packages": [],
     "packages-dev": [
         {
@@ -387,6 +387,54 @@
                 "parser"
             ],
             "time": "2019-03-17T18:47:21+00:00"
+        },
+        {
+            "name": "hamcrest/hamcrest-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hamcrest/hamcrest-php.git",
+                "reference": "c0436bf63689fc334f67ccaa5e17458af9700b42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/c0436bf63689fc334f67ccaa5e17458af9700b42",
+                "reference": "c0436bf63689fc334f67ccaa5e17458af9700b42",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3|^7.0"
+            },
+            "replace": {
+                "cordoval/hamcrest-php": "*",
+                "davedevelopment/hamcrest-php": "*",
+                "kodova/hamcrest-php": "*"
+            },
+            "require-dev": {
+                "phpunit/php-file-iterator": "^1.4",
+                "phpunit/phpunit": "^4.8.36 || ^5.7 || ^6.5 || ^7.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "hamcrest"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "This is the PHP port of Hamcrest Matchers",
+            "keywords": [
+                "test"
+            ],
+            "time": "2019-04-18T04:49:30+00:00"
         },
         {
             "name": "herrera-io/json",
@@ -1543,6 +1591,71 @@
             "time": "2013-05-17T14:37:21+00:00"
         },
         {
+            "name": "mockery/mockery",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mockery/mockery.git",
+                "reference": "61d098f5ac3c92353cfb636c20c3633306ebe949"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/61d098f5ac3c92353cfb636c20c3633306ebe949",
+                "reference": "61d098f5ac3c92353cfb636c20c3633306ebe949",
+                "shasum": ""
+            },
+            "require": {
+                "hamcrest/hamcrest-php": "~2.0",
+                "lib-pcre": ">=7.0",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7.10|~6.5|~7.0|~8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mockery": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Pádraic Brady",
+                    "email": "padraic.brady@gmail.com",
+                    "homepage": "http://blog.astrumfutura.com"
+                },
+                {
+                    "name": "Dave Marshall",
+                    "email": "dave.marshall@atstsolutions.co.uk",
+                    "homepage": "http://davedevelopment.co.uk"
+                }
+            ],
+            "description": "Mockery is a simple yet flexible PHP mock object framework",
+            "homepage": "https://github.com/mockery/mockery",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "library",
+                "mock",
+                "mock objects",
+                "mockery",
+                "stub",
+                "test",
+                "test double",
+                "testing"
+            ],
+            "time": "2019-10-24T13:49:13+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.x-dev",
             "source": {
@@ -2164,12 +2277,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "5a03e94d9f0e4047097a4870d704b5b4eda4eb0c"
+                "reference": "2bcb7042ce5e88d441225d67a9af53b0d2afed99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5a03e94d9f0e4047097a4870d704b5b4eda4eb0c",
-                "reference": "5a03e94d9f0e4047097a4870d704b5b4eda4eb0c",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2bcb7042ce5e88d441225d67a9af53b0d2afed99",
+                "reference": "2bcb7042ce5e88d441225d67a9af53b0d2afed99",
                 "shasum": ""
             },
             "require": {
@@ -2219,7 +2332,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-10-23T09:02:55+00:00"
+            "time": "2019-10-28T09:21:11+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2416,12 +2529,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "e0dedce2f080da690aa63135667f1d842569207b"
+                "reference": "dfdb50f92c962006dfe1cdcb30ef7166082a6d50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e0dedce2f080da690aa63135667f1d842569207b",
-                "reference": "e0dedce2f080da690aa63135667f1d842569207b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dfdb50f92c962006dfe1cdcb30ef7166082a6d50",
+                "reference": "dfdb50f92c962006dfe1cdcb30ef7166082a6d50",
                 "shasum": ""
             },
             "require": {
@@ -2491,7 +2604,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-10-24T09:26:13+00:00"
+            "time": "2019-10-28T12:42:51+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -2996,12 +3109,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "0b71b4de0c55d2eb2946f30052e94d23e014c2cd"
+                "reference": "c57ba51c28b64ef8a4b14b40bceb2c5ca19e9406"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/0b71b4de0c55d2eb2946f30052e94d23e014c2cd",
-                "reference": "0b71b4de0c55d2eb2946f30052e94d23e014c2cd",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/c57ba51c28b64ef8a4b14b40bceb2c5ca19e9406",
+                "reference": "c57ba51c28b64ef8a4b14b40bceb2c5ca19e9406",
                 "shasum": ""
             },
             "require": {
@@ -3052,7 +3165,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2019-10-23T09:03:30+00:00"
+            "time": "2019-10-28T09:22:49+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -3615,12 +3728,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "f6732bc2918ab24ba80a7d14dd800179e973aed3"
+                "reference": "62f50014af37409189dab8727935bb8d58e5f906"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/f6732bc2918ab24ba80a7d14dd800179e973aed3",
-                "reference": "f6732bc2918ab24ba80a7d14dd800179e973aed3",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/62f50014af37409189dab8727935bb8d58e5f906",
+                "reference": "62f50014af37409189dab8727935bb8d58e5f906",
                 "shasum": ""
             },
             "require": {
@@ -3658,7 +3771,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-10-24T21:06:58+00:00"
+            "time": "2019-10-28T21:16:13+00:00"
         },
         {
             "name": "symfony/config",
@@ -5173,7 +5286,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "roave/security-advisories": 20
+        "roave/security-advisories": 20,
+        "mockery/mockery": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

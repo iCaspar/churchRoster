@@ -4,16 +4,13 @@
 .DS_Store
 
 # PHPStorm
-/*/.idea/
+.idea/
 
 # 3rd Party Packages
-app/node_modules/
-app/vendor/
+node_modules/
+vendor/
 
 # PHPUnit
 .phpunit.*
 
 # Other
-/logs/
-/reports/
-/root/
