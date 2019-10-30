@@ -37,6 +37,9 @@ class PersonTest extends TestCase
             $membershipStatus
         );
 
-        $this->assertInstanceOf('ChurchRoster\Data\Person', $person);
+        $this->assertInstanceOf(
+            'ChurchRoster\Data\Person',
+            $person,
+            'Object created is not a Person class.');
     }
 }

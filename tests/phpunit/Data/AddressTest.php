@@ -32,6 +32,9 @@ class AddressTest extends TestCase
             '12345-6789'
         );
 
-        $this->assertInstanceOf('ChurchRoster\Data\Address', $address);
+        $this->assertInstanceOf(
+            'ChurchRoster\Data\Address',
+            $address,
+            'Object created is not an Address class.');
     }
 }
