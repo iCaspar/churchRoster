@@ -13,7 +13,7 @@ use ChurchRoster\Data\MemberShipStatus;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for Memership Status Class.
+ * Test for MemershipStatus Class.
  *
  * @package ChurchRoster\Tests\Unit\Data
  * @author  Caspar Green
@@ -26,16 +26,44 @@ class MemberShipStatusTest extends TestCase
      * @var MemberShipStatus
      */
     private $membershipStatus;
-    private $startTime;
-    private $stopTime;
 
+    /**
+     * Earliest acceptable time for timestamp.
+     * @var int
+     */
+    private $startTime;
+
+    /**
+     * Latest acceptable time for timestamp.
+     * @var int
+     */
+    private $endTime;
+
+    /**
+     * Set up before each test.
+     *
+     * @return void
+     *
+     * @throws \Exception
+     * @author Caspar Green
+     * @since  ver 1.0.0
+     *
+     */
     public function setUp(): void
     {
         $this->startTime = (int)microtime(true);
         $this->membershipStatus = new MemberShipStatus(1, 'Single');
-        $this->stopTime = (int)microtime(true);
+        $this->endTime = (int)microtime(true);
     }
 
+    /**
+     * Test that object is a MembershipStatus.
+     *
+     * @return void
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
     public function testObjectIsMembershipStatusClass()
     {
         $this->assertInstanceOf(
@@ -45,7 +73,15 @@ class MemberShipStatusTest extends TestCase
         );
     }
 
-    public function testGettersReturnCorrectProperties()
+    /**
+     * Test that getters return correct property values.
+     *
+     * @return void
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
+    public function testGettersReturnCorrectPropertyValues()
     {
         $this->assertEquals(
             1,
@@ -62,13 +98,13 @@ class MemberShipStatusTest extends TestCase
         $this->assertGreaterThanOrEqual(
             $this->startTime,
             $this->membershipStatus->getTimeStamp()->getTimestamp(),
-            'Returned Time Stamp before possible range.'
+            'Returned membership status time stamp before possible range.'
         );
 
         $this->assertLessThanOrEqual(
-            $this->stopTime,
+            $this->endTime,
             $this->membershipStatus->getTimeStamp()->getTimestamp(),
-            'Returned Time Stamp after possible range.'
+            'Returned membership status time stamp after possible range.'
         );
     }
 }
