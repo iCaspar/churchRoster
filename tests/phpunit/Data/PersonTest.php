@@ -9,6 +9,8 @@
 
 namespace ChurchRoster\Tests\Unit\Data;
 
+use ChurchRoster\Data\Address;
+use ChurchRoster\Data\MemberShipStatus;
 use ChurchRoster\Data\Person;
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -23,12 +25,44 @@ use DateTime;
  */
 class PersonTest extends TestCase
 {
-    public function testObjectIsPersonClass()
+    /**
+     * Person test object.
+     * @var Person
+     */
+    private $person;
+
+    /**
+     * Earliest acceptable time for timestamp.
+     * @var int
+     */
+    private $startTime;
+
+    /**
+     * Latest acceptable time for timestamp.
+     * @var int
+     */
+    private $endTime;
+
+    /**
+     * Set up before each test.
+     *
+     * @return void
+     * @throws \Exception
+     * @author Caspar Green
+     * @since  ver 1.0.0
+     *
+     */
+    public function setUp(): void
     {
         $address = Mockery::Mock('ChurchRoster\Data\Address');
+
         $membershipStatus = Mockery::Mock('ChurchRoster\Data\MembershipStatus');
-        $person = new Person(
-            34,
+
+        $this->startTime = (int)microtime(true);
+        /** @var Address|Mockery\MockInterface $address */
+        /** @var MemberShipStatus|Mockery\MockInterface $membershipStatus */
+        $this->person = new Person(
+            1,
             'John',
             'Smith',
             new DateTime('12/25/1968'),
@@ -36,10 +70,25 @@ class PersonTest extends TestCase
             'johnsmith@example.com',
             $membershipStatus
         );
+        $this->endTime = (int)microtime(true);
+    }
 
+    /**
+     * Test that object is a Person.
+     *
+     * @return void
+     *
+     * @throws \Exception
+     * @author Caspar Green
+     * @since  ver 1.0.0
+     *
+     */
+    public function testObjectIsPersonClass()
+    {
         $this->assertInstanceOf(
             'ChurchRoster\Data\Person',
-            $person,
-            'Object created is not a Person class.');
+            $this->person,
+            'Object created is not a Person class.'
+        );
     }
 }
