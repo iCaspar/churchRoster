@@ -9,7 +9,7 @@
 
 namespace ChurchRoster\Tests\Unit\Data;
 
-use ChurchRoster\Data\MemberShipStatus;
+use ChurchRoster\Data\MembershipStatus;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,11 +19,11 @@ use PHPUnit\Framework\TestCase;
  * @author  Caspar Green
  * @since   ver 1.0.0
  */
-class MemberShipStatusTest extends TestCase
+class MembershipStatusTest extends TestCase
 {
     /**
      * Membership Status test object.
-     * @var MemberShipStatus
+     * @var MembershipStatus
      */
     private $membershipStatus;
 
@@ -52,7 +52,7 @@ class MemberShipStatusTest extends TestCase
     public function setUp(): void
     {
         $this->startTime = (int)microtime(true);
-        $this->membershipStatus = new MemberShipStatus(1, 'Single');
+        $this->membershipStatus = new MembershipStatus(1, 'Single');
         $this->endTime = (int)microtime(true);
     }
 

@@ -18,7 +18,7 @@ use DateTime;
  * @author  Caspar Green
  * @since   ver 1.0.0
  */
-class MemberShipStatus
+class MembershipStatus
 {
     /**
      * Membership Status ID.
