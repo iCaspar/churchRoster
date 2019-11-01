@@ -70,8 +70,6 @@ class PersonTest extends TestCase
         $this->membershipStatus = Mockery::Mock('ChurchRoster\Data\MembershipStatus');
 
         $this->startTime = (int)microtime(true);
-        /** @var Address|Mockery\MockInterface $address */
-        /** @var MembershipStatus|Mockery\MockInterface $membershipStatus */
         $this->person = new Person(
             1,
             'John',
