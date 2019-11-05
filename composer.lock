@@ -286,12 +286,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "29ed26d6cae6a60a09e245d4273c6146893331d6"
+                "reference": "5242d66dbeb21a30dd8a3e66bf7a73b66e05e1f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/29ed26d6cae6a60a09e245d4273c6146893331d6",
-                "reference": "29ed26d6cae6a60a09e245d4273c6146893331d6",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/5242d66dbeb21a30dd8a3e66bf7a73b66e05e1f6",
+                "reference": "5242d66dbeb21a30dd8a3e66bf7a73b66e05e1f6",
                 "shasum": ""
             },
             "require": {
@@ -340,7 +340,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2019-09-17T06:50:52+00:00"
+            "time": "2019-10-30T14:39:59+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -1403,12 +1403,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "16b9aaa4ab7d21ecd1144db526c01da829ec8bdd"
+                "reference": "d95fa2ba2cc017ef816f77f4b134748cfb491c19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/16b9aaa4ab7d21ecd1144db526c01da829ec8bdd",
-                "reference": "16b9aaa4ab7d21ecd1144db526c01da829ec8bdd",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/d95fa2ba2cc017ef816f77f4b134748cfb491c19",
+                "reference": "d95fa2ba2cc017ef816f77f4b134748cfb491c19",
                 "shasum": ""
             },
             "require": {
@@ -1479,7 +1479,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2019-10-21T21:39:01+00:00"
+            "time": "2019-11-01T17:21:52+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -1596,18 +1596,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "61d098f5ac3c92353cfb636c20c3633306ebe949"
+                "reference": "61625cd697e00c8b4b4e98732246732395cb28af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/61d098f5ac3c92353cfb636c20c3633306ebe949",
-                "reference": "61d098f5ac3c92353cfb636c20c3633306ebe949",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/61625cd697e00c8b4b4e98732246732395cb28af",
+                "reference": "61625cd697e00c8b4b4e98732246732395cb28af",
                 "shasum": ""
             },
             "require": {
                 "hamcrest/hamcrest-php": "~2.0",
                 "lib-pcre": ">=7.0",
-                "php": ">=5.6.0"
+                "php": ">=5.6.0",
+                "sebastian/comparator": "^1.2.4|^3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~5.7.10|~6.5|~7.0|~8.0"
@@ -1653,7 +1654,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2019-10-24T13:49:13+00:00"
+            "time": "2019-11-05T05:24:31+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2277,12 +2278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "2bcb7042ce5e88d441225d67a9af53b0d2afed99"
+                "reference": "b85a9205e06bead6f243af7f29812d8a62e50027"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2bcb7042ce5e88d441225d67a9af53b0d2afed99",
-                "reference": "2bcb7042ce5e88d441225d67a9af53b0d2afed99",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/b85a9205e06bead6f243af7f29812d8a62e50027",
+                "reference": "b85a9205e06bead6f243af7f29812d8a62e50027",
                 "shasum": ""
             },
             "require": {
@@ -2332,7 +2333,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-10-28T09:21:11+00:00"
+            "time": "2019-11-03T06:15:39+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2529,12 +2530,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "dfdb50f92c962006dfe1cdcb30ef7166082a6d50"
+                "reference": "62cd2771050dbd804185d17f320496d2f080964e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dfdb50f92c962006dfe1cdcb30ef7166082a6d50",
-                "reference": "dfdb50f92c962006dfe1cdcb30ef7166082a6d50",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/62cd2771050dbd804185d17f320496d2f080964e",
+                "reference": "62cd2771050dbd804185d17f320496d2f080964e",
                 "shasum": ""
             },
             "require": {
@@ -2604,7 +2605,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-10-28T12:42:51+00:00"
+            "time": "2019-11-05T08:48:51+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -2753,12 +2754,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2"
+                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2",
-                "reference": "bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/446d54b4cb6bf489fc9d75f55843658e6f25d801",
+                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801",
                 "shasum": ""
             },
             "require": {
@@ -2792,7 +2793,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2019-10-25T08:06:51+00:00"
+            "time": "2019-11-01T11:05:21+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -2848,12 +2849,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "eb59d9f35a47f567ae15e7179d7c666489cd4b85"
+                "reference": "f8c8349a4b12a26edfa8b21d07d3dbeb6dcedcfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/eb59d9f35a47f567ae15e7179d7c666489cd4b85",
-                "reference": "eb59d9f35a47f567ae15e7179d7c666489cd4b85",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/f8c8349a4b12a26edfa8b21d07d3dbeb6dcedcfa",
+                "reference": "f8c8349a4b12a26edfa8b21d07d3dbeb6dcedcfa",
                 "shasum": ""
             },
             "conflict": {
@@ -3056,7 +3057,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2019-10-09T14:04:58+00:00"
+            "time": "2019-10-29T22:11:03+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -3728,12 +3729,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "62f50014af37409189dab8727935bb8d58e5f906"
+                "reference": "6a4abf447866731eed5d4a944686992366840cc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/62f50014af37409189dab8727935bb8d58e5f906",
-                "reference": "62f50014af37409189dab8727935bb8d58e5f906",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/6a4abf447866731eed5d4a944686992366840cc3",
+                "reference": "6a4abf447866731eed5d4a944686992366840cc3",
                 "shasum": ""
             },
             "require": {
@@ -3771,7 +3772,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-10-28T21:16:13+00:00"
+            "time": "2019-11-03T21:26:48+00:00"
         },
         {
             "name": "symfony/config",
@@ -4955,12 +4956,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-json.git",
-                "reference": "5651c7a88e4c24825820cd2f816aaa7746207060"
+                "reference": "b7b53ac36056cedfff020fe89139d264c20993b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-json/zipball/5651c7a88e4c24825820cd2f816aaa7746207060",
-                "reference": "5651c7a88e4c24825820cd2f816aaa7746207060",
+                "url": "https://api.github.com/repos/zendframework/zend-json/zipball/b7b53ac36056cedfff020fe89139d264c20993b0",
+                "reference": "b7b53ac36056cedfff020fe89139d264c20993b0",
                 "shasum": ""
             },
             "require": {
@@ -4997,7 +4998,7 @@
                 "json",
                 "zf"
             ],
-            "time": "2019-10-09T13:59:10+00:00"
+            "time": "2019-11-02T11:41:55+00:00"
         },
         {
             "name": "zendframework/zend-serializer",
