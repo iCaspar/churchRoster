@@ -40,8 +40,61 @@ class MySQLDatabase implements Database
         }
     }
 
+    /**
+     * Get the database's PDO connection object.
+     *
+     * @return PDO
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
     public function getConnection(): PDO
     {
         return $this->connection;
+    }
+
+    /**
+     * Insert a record.
+     *
+     * @param string $table Table in which to insert the record.
+     * @param array $columns Data to insert.
+     * @return bool
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
+    public function insert(string $table, array $columns): bool
+    {
+        $dataSetTemplate = $this->getDataSetTemplate($columns);
+
+        $query = "INSERT INTO {$table} SET {$dataSetTemplate}";
+        $statement = $this->connection->prepare($query);
+
+        foreach ($columns as $header => $value) {
+            $statement->bindParam(":{$header}", $value);
+        }
+
+        return $statement->execute();
+    }
+
+    /**
+     * Get a dataset query template for a set of columns.
+     *
+     * @param array $columns Data columns for the query.
+     *
+     * @return string The dataset template string.
+     * @author Caspar Green
+     * @since  ver 1.0.0
+     *
+     */
+    protected function getDataSetTemplate(array $columns): string
+    {
+        $dataSetTemplate = '';
+
+        foreach ($columns as $header => $value) {
+            $dataSetTemplate .= "{$header}=:{$header}, ";
+        }
+
+        return trim($dataSetTemplate, ', ');
     }
 }
