@@ -13,7 +13,7 @@ namespace ChurchRoster\Db;
  * Interface DbConnection
  * @package ChurchRoster\Db
  */
-interface DbConnection
+interface Database
 {
 
 }

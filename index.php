@@ -11,7 +11,7 @@ require_once 'vendor/autoload.php';
 
 $dbCreds = include('.env/env.php');
 
-$connection = new \ChurchRoster\Db\MySQLConnection(
+$connection = new \ChurchRoster\Db\MySQLDatabase(
     $dbCreds['host_name'],
     $dbCreds['db_name'],
     $dbCreds['db_user'],

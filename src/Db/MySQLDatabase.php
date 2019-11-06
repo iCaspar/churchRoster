@@ -19,7 +19,7 @@ use PDOException;
  * @author  Caspar Green
  * @since   ver 1.0.0
  */
-class MySQLConnection implements DbConnection
+class MySQLDatabase implements Database
 {
     /**
      * PDO Database Connection Object.
@@ -35,8 +35,6 @@ class MySQLConnection implements DbConnection
                 $user,
                 $password
             );
-
-            //var_dump($this->connection);
         } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();
         }

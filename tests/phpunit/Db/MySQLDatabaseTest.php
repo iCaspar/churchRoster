@@ -9,11 +9,11 @@
 
 namespace ChurchRoster\Tests\Unit\Db;
 
-use ChurchRoster\Db\MySQLConnection;
+use ChurchRoster\Db\MySQLDatabase;
 use PHPUnit\Framework\TestCase;
 use PDOException;
 
-class MySQLConnectionTest extends TestCase
+class MySQLDatabaseTest extends TestCase
 {
     /**
      * Test DB credentials.
@@ -46,7 +46,7 @@ class MySQLConnectionTest extends TestCase
     {
         ob_start();
 
-        $connection = new MySQLConnection(
+        $connection = new MySQLDatabase(
             'bad_host',
             'bad_db_name',
             'bad_username',
@@ -64,7 +64,7 @@ class MySQLConnectionTest extends TestCase
 
     public function testGetConnectionReturnsPDO()
     {
-        $connection = new MySQLConnection(
+        $connection = new MySQLDatabase(
             $this->creds['test_db_host_name'],
             $this->creds['test_db_name'],
             $this->creds['test_db_user'],
