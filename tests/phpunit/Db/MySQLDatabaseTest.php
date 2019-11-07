@@ -20,19 +20,68 @@ class MySQLDatabaseTest extends TestCase
      * Test DB credentials.
      * @var array
      */
-    private $creds;
+    private static $creds;
 
     /**
-     * Set up before running Connection tests.
+     * DB Connection for configuring tests.
+     * @var PDO
+     */
+    private static $testConn;
+
+    /**
+     * MySQLDatabase object to test.
+     * @var MySQLDatabase
+     */
+    private static $database;
+
+    /**
+     * Set up before running tests.
      *
      * @return void
      * @since  ver 1.0.0
      *
      * @author Caspar Green
      */
-    public function setUp(): void
+    public static function setUpBeforeClass(): void
     {
-        $this->creds = include('.env/env.php');
+        $creds = include('.env/env.php');
+        self::$creds = $creds;
+
+        try {
+            self::$testConn = new PDO(
+                "mysql:host={$creds['test_db_host_name']};dbname={$creds['test_db_name']}",
+                $creds['test_db_user'],
+                $creds['test_db_pass']
+            );
+
+            self::$database = new MySQLDatabase(
+                self::$creds['test_db_host_name'],
+                self::$creds['test_db_name'],
+                self::$creds['test_db_user'],
+                self::$creds['test_db_pass']
+            );
+
+        } catch (PDOException $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Tear down after all tests.
+     *
+     * @return void
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
+    public static function tearDownAfterClass(): void
+    {
+        $dropAllQuery = "DROP TABLE *";
+        $statement = self::$testConn->prepare($dropAllQuery);
+        $statement->execute();
+
+        self::$testConn = null;
+        self::$database = null;
     }
 
     /**
@@ -73,14 +122,7 @@ class MySQLDatabaseTest extends TestCase
      */
     public function testGetConnectionReturnsPDO()
     {
-        $database = new MySQLDatabase(
-            $this->creds['test_db_host_name'],
-            $this->creds['test_db_name'],
-            $this->creds['test_db_user'],
-            $this->creds['test_db_pass']
-        );
-
-        $connectionObject = $database->getConnection();
+        $connectionObject = self::$database->getConnection();
 
         $this->assertInstanceOf(
             'PDO',
@@ -90,25 +132,16 @@ class MySQLDatabaseTest extends TestCase
     }
 
     /**
-     * Test create() inserts a record into the database.
+     * Test insert() inserts a record into the database.
      *
      * @return void
      * @since  ver 1.0.0
      *
      * @author Caspar Green
      */
-    public function testCreateInsertsRecordIntoDatabase()
+    public function testInsertInsertsRecordIntoDatabase()
     {
-        // Prepare the database for the test by creating an empty membershipstatuses table.
-        // TODO: Move to SetUp() method.
-
         try {
-            $testConn = new PDO(
-                "mysql:host={$this->creds['test_db_host_name']};dbname={$this->creds['test_db_name']}",
-                $this->creds['test_db_user'],
-                $this->creds['test_db_pass']
-            );
-
             $createMemberStatusesTableQuery = "CREATE TABLE `membershipstatuses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -116,32 +149,21 @@ class MySQLDatabaseTest extends TestCase
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
-            $statement = $testConn->prepare($createMemberStatusesTableQuery);
+            $statement = self::$testConn->prepare($createMemberStatusesTableQuery);
             $statement->execute();
         } catch (PDOException $e) {
-            die('Error: ' . $e->getMessage());
+            die('Insert Record Test Error: ' . $e->getMessage());
         }
 
-        // Create a new MySQLDatabase instance to test.
-
-        $database = new MySQLDatabase(
-            $this->creds['test_db_host_name'],
-            $this->creds['test_db_name'],
-            $this->creds['test_db_user'],
-            $this->creds['test_db_pass']
-        );
-
-        // Run the test.
-        $database->insert(
+        self::$database->insert(
             'membershipstatuses',
             [
                 'name' => 'Visitor'
             ]
         );
 
-        // Read the membershipstatuses table and assert against result.
         $getMembershipstatusestableContentsQuery = "SELECT * FROM membershipstatuses";
-        $statement = $testConn->prepare($getMembershipstatusestableContentsQuery);
+        $statement = self::$testConn->prepare($getMembershipstatusestableContentsQuery);
         $statement->execute();
 
         $row = $statement->fetch(PDO::FETCH_ASSOC);
@@ -152,11 +174,8 @@ class MySQLDatabaseTest extends TestCase
             'Returned wrong membership status name.'
         );
 
-        // Reset Database after test.
-        // TODO: Move to TearDown() method.
-
         $resetDatabaseQuery = "DROP TABLE membershipstatuses";
-        $statement = $testConn->prepare($resetDatabaseQuery);
+        $statement = self::$testConn->prepare($resetDatabaseQuery);
         $statement->execute();
     }
 }
