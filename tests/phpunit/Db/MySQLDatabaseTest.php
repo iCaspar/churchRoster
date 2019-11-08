@@ -44,7 +44,7 @@ class MySQLDatabaseTest extends TestCase
      */
     public static function setUpBeforeClass(): void
     {
-        $creds = include('.env/env.php');
+        $creds = include 'tests/phpunit/.env/testenv.php';
         self::$creds = $creds;
 
         try {
