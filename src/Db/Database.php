@@ -24,4 +24,16 @@ interface Database
      * @author Caspar Green
      */
     public function insert(string $table, array $columns): bool;
+
+    /**
+     * Read contents of a table.
+     *
+     * @param string $table Table to read.
+     *
+     * @return array Table contents.
+     * @author Caspar Green
+     * @since  ver 1.0.0
+     *
+     */
+    public function read(string $table): array;
 }

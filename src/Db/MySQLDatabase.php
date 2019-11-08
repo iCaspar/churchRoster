@@ -97,4 +97,24 @@ class MySQLDatabase implements Database
 
         return trim($dataSetTemplate, ', ');
     }
+
+    /**
+     * Read contents of a table.
+     *
+     * @param string $table Table to read.
+     *
+     * @return array Table contents.
+     * @author Caspar Green
+     * @since  ver 1.0.0
+     *
+     */
+    public function read(string $table): array
+    {
+        $query = "SELECT * from {$table}";
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+
+        $result = $statement->rowCount() > 0 ? $statement->fetchAll(PDO::FETCH_ASSOC) : [];
+        return $result;
+    }
 }
