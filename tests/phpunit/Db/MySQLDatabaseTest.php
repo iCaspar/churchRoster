@@ -141,19 +141,7 @@ class MySQLDatabaseTest extends TestCase
      */
     public function testInsertInsertsRecordIntoDatabase()
     {
-        try {
-            $createMemberStatusesTableQuery = "CREATE TABLE `membershipstatuses` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL DEFAULT '',
-  `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
-
-            $statement = self::$testConn->prepare($createMemberStatusesTableQuery);
-            $statement->execute();
-        } catch (PDOException $e) {
-            die('Insert Record Test Error: ' . $e->getMessage());
-        }
+        $this->createMembershipStatTable();
 
         self::$database->insert(
             'membershipstatuses',
@@ -189,6 +177,45 @@ class MySQLDatabaseTest extends TestCase
      */
     public function testReadReadsTableContents()
     {
+        $this->createMembershipStatTable();
+        $this->insertMembershipStatRecord();
+
+        $result = self::$database->read('membershipstatuses');
+        $this->assertCount(1, $result);
+        $this->assertArrayHasKey('name', $result[0]);
+        $this->assertEquals('Visitor', $result[0]['name']);
+
+        $resetDatabaseQuery = "DROP TABLE membershipstatuses";
+        $statement = self::$testConn->prepare($resetDatabaseQuery);
+        $statement->execute();
+    }
+
+    /**
+     * Test update() updates the indicated record.
+     *
+     * @return void
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
+    public function testUpdateUpdatesIndicatedRecord()
+    {
+        $this->createMembershipStatTable();
+        $this->insertMembershipStatRecord();
+
+        // TODO: Write this Test
+    }
+
+    /**
+     * Create a membershipstatuses table in the test database.
+     *
+     * @return void
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
+    private function createMembershipStatTable()
+    {
         try {
             $createMemberStatusesTableQuery = "CREATE TABLE `membershipstatuses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -200,23 +227,29 @@ class MySQLDatabaseTest extends TestCase
             $statement = self::$testConn->prepare($createMemberStatusesTableQuery);
             $statement->execute();
 
+        } catch (PDOException $e) {
+            die('Read Table Test Error: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Enter a sample record in the membershipstatuses table.
+     *
+     * @return void
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
+    private function insertMembershipStatRecord()
+    {
+        try {
             $name = 'Visitor';
             $insertMemberStatusesQuery = "INSERT into membershipstatuses SET name=:name";
             $statement = self::$testConn->prepare($insertMemberStatusesQuery);
             $statement->bindParam(":name", $name);
             $statement->execute();
-
         } catch (PDOException $e) {
             die('Read Table Test Error: ' . $e->getMessage());
         }
-
-        $result = self::$database->read('membershipstatuses');
-        $this->assertCount(1, $result);
-        $this->assertArrayHasKey('name', $result[0]);
-        $this->assertEquals('Visitor', $result[0]['name']);
-
-        $resetDatabaseQuery = "DROP TABLE membershipstatuses";
-        $statement = self::$testConn->prepare($resetDatabaseQuery);
-        $statement->execute();
     }
 }
