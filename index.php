@@ -33,6 +33,16 @@ if ($_POST && 'Save Membership Status' === $_POST['submit']) {
     }
 }
 
+$tableContents = [];
+
+try {
+    $readMembershipTableQuery = "SELECT * FROM membershipstatuses";
+    $statement = $database->getConnection()->prepare($readMembershipTableQuery);
+    $statement->execute();
+    $membershipTableContents = $statement->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $exception) {
+    echo 'Database Error: ' . $exception->getMessage();
+}
 ?>
 
 <!doctype html>
@@ -49,12 +59,24 @@ if ($_POST && 'Save Membership Status' === $_POST['submit']) {
         <div class="section-header">
             <h2>Membership Statuses</h2>
         </div>
-        <p class="notice"><?php if ($notice) {
+        <p class="notice">
+            <?php if ($notice) {
                 echo $notice;
             } ?></p>
-
+        <div>
+            <table class="membershipstatus-table">
+                <?php foreach ($membershipTableContents as $row) : ?>
+                    <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['timestamp']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
         <form method="post">
             <table class="table table-add-item">
+                <h3>Add an Item:</h3>
                 <tr>
                     <td>Membership Status Name</td>
                     <td><input type="text" name="name" class="form-control"/></td>
