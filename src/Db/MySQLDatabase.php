@@ -117,4 +117,33 @@ class MySQLDatabase implements Database
         $result = $statement->rowCount() > 0 ? $statement->fetchAll(PDO::FETCH_ASSOC) : [];
         return $result;
     }
+
+    /**
+     * Update a record.
+     *
+     * @param string $table The table where the record is to be found
+     * @param int $id The record ID to update
+     * @param array $columns The data columns to update
+     *
+     * @return bool
+     * @author Caspar Green
+     * @since  ver 1.0.0
+     *
+     */
+    public function update(string $table, int $id, array $columns): bool
+    {
+        $dataSetTemplate = $this->getDataSetTemplate($columns);
+
+        /** @noinspection SqlResolve */
+        $query = "UPDATE {$table} SET {$dataSetTemplate} WHERE id = :id";
+        $statement = $this->connection->prepare($query);
+
+        foreach ($columns as $header => $value) {
+            $statement->bindParam(":{$header}", $value);
+        }
+
+        $statement->bindParam(':id', $id);
+
+        return $statement->execute();
+    }
 }

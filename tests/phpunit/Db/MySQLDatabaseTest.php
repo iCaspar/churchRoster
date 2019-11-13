@@ -141,7 +141,7 @@ class MySQLDatabaseTest extends TestCase
      */
     public function testInsertInsertsRecordIntoDatabase()
     {
-        $this->createMembershipStatTable();
+        $this->createMembershipStatusesTable();
 
         self::$database->insert(
             'membershipstatuses',
@@ -162,9 +162,7 @@ class MySQLDatabaseTest extends TestCase
             'Returned wrong membership status name.'
         );
 
-        $resetDatabaseQuery = "DROP TABLE membershipstatuses";
-        $statement = self::$testConn->prepare($resetDatabaseQuery);
-        $statement->execute();
+        $this->cleanUpMembershipStatuses();
     }
 
     /**
@@ -177,17 +175,16 @@ class MySQLDatabaseTest extends TestCase
      */
     public function testReadReadsTableContents()
     {
-        $this->createMembershipStatTable();
-        $this->insertMembershipStatRecord();
+        $this->createMembershipStatusesTable();
+        $this->insertMembershipStatusRecord();
 
         $result = self::$database->read('membershipstatuses');
+
         $this->assertCount(1, $result);
         $this->assertArrayHasKey('name', $result[0]);
         $this->assertEquals('Visitor', $result[0]['name']);
 
-        $resetDatabaseQuery = "DROP TABLE membershipstatuses";
-        $statement = self::$testConn->prepare($resetDatabaseQuery);
-        $statement->execute();
+        $this->cleanUpMembershipStatuses();
     }
 
     /**
@@ -200,10 +197,25 @@ class MySQLDatabaseTest extends TestCase
      */
     public function testUpdateUpdatesIndicatedRecord()
     {
-        $this->createMembershipStatTable();
-        $this->insertMembershipStatRecord();
+        $this->createMembershipStatusesTable();
+        $this->insertMembershipStatusRecord();
 
-        // TODO: Write this Test
+        self::$database->update(
+            'membershipstatuses',
+            1,
+            [
+                'name' => 'Member'
+            ]
+        );
+
+        $getRecordQuery = "SELECT * FROM membershipstatuses";
+        $statement = self::$testConn->prepare($getRecordQuery);
+        $statement->execute();
+        $testRecord = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertEquals('Member', $testRecord['name']);
+
+        $this->cleanUpMembershipStatuses();
     }
 
     /**
@@ -214,7 +226,7 @@ class MySQLDatabaseTest extends TestCase
      *
      * @author Caspar Green
      */
-    private function createMembershipStatTable()
+    private function createMembershipStatusesTable()
     {
         try {
             $createMemberStatusesTableQuery = "CREATE TABLE `membershipstatuses` (
@@ -240,7 +252,7 @@ class MySQLDatabaseTest extends TestCase
      *
      * @author Caspar Green
      */
-    private function insertMembershipStatRecord()
+    private function insertMembershipStatusRecord()
     {
         try {
             $name = 'Visitor';
@@ -250,6 +262,25 @@ class MySQLDatabaseTest extends TestCase
             $statement->execute();
         } catch (PDOException $e) {
             die('Read Table Test Error: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Cleanup test Membershipstatuses table.
+     *
+     * @return void
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
+    private function cleanUpMembershipStatuses()
+    {
+        try {
+            $resetDatabaseQuery = "DROP TABLE membershipstatuses";
+            $statement = self::$testConn->prepare($resetDatabaseQuery);
+            $statement->execute();
+        } catch (PDOException $e) {
+            die('Test DB Cleanup Error: ' . $e->getMessage());
         }
     }
 }
