@@ -25,9 +25,33 @@ try {
 
 if ($_POST && 'Save Membership Status' === $_POST['submit']) {
     $name = htmlspecialchars(strip_tags($_POST['name']));
+
     try {
         $result = $database->insert('membershipstatuses', ['name' => $name]);
-        $notice = $result ? 'New Membership Status added!' : 'Failed adding new Membership Status!';
+        $notice = $result ? 'New Membership Status added.' : 'Failed adding new Membership Status.';
+    } catch (PDOException $exception) {
+        echo 'Database Error: ' . $exception->getMessage();
+    }
+}
+
+if ($_POST && 'Rename Status' === $_POST['submit']) {
+    $name = htmlspecialchars(strip_tags($_POST['name']));
+    $id = (int)$_POST['id'];
+
+    try {
+        $result = $database->update('membershipstatuses', $id, ['name' => $name]);
+        $notice = $result ? 'Membership Status Updated.' : 'Failed updating Membership Status.';
+    } catch (PDOException $exception) {
+        echo 'Database Error: ' . $exception->getMessage();
+    }
+}
+
+if ($_POST && 'Remove Status' === $_POST['submit']) {
+    $id = (int)$_POST['id'];
+
+    try {
+        $result = $database->delete('membershipstatuses', $id);
+        $notice = $result ? 'Membership Status Removed.' : 'Failed removing Membership Status.';
     } catch (PDOException $exception) {
         echo 'Database Error: ' . $exception->getMessage();
     }
@@ -46,7 +70,7 @@ try {
 ?>
 
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Church Roster</title>
 </head>
@@ -75,15 +99,47 @@ try {
             </table>
         </div>
         <form method="post">
+            <h3>Add an Item:</h3>
             <table class="table table-add-item">
-                <h3>Add an Item:</h3>
                 <tr>
-                    <td>Membership Status Name</td>
-                    <td><input type="text" name="name" class="form-control"/></td>
+                    <td><label for="add-name">Membership Status Name:</label>
+                        <input type="text" name="name" id="add-name" class="form-control"/></td>
                 </tr>
                 <tr>
                     <td><input type="submit" name="submit" value="Save Membership Status"
                                class="button button-primary"/></td>
+                </tr>
+            </table>
+        </form>
+        <form method="post">
+            <h3>Update an Item:</h3>
+            <table class="table table-edit-item">
+                <tr>
+                    <td><label for="edit-id">Membership Status ID:</label>
+                        <input type="number" name="id" id="edit-id" class="form-control"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="edit-name">New Status Name:</label>
+                        <input type="text" name="name" id="edit-name" class="form-control"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="submit" value="Rename Status"
+                               class="button button-primary"/></td>
+                </tr>
+            </table>
+        </form>
+        <form method="post">
+            <h3>Remove an Item:</h3>
+            <table>
+                <tr>
+                    <td>
+                        <label for="remove-id">Membership Status ID to remove:</label>
+                        <input type="number" name="id" id="remove-id" class="form-control"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="submit" value="Remove Status"
+                               class="button button-primary"</td>
                 </tr>
             </table>
         </form>
