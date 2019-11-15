@@ -85,34 +85,6 @@ class MySQLDatabaseTest extends TestCase
     }
 
     /**
-     * Test Constructor prints a PDO Exception message when it cannot connect.
-     *
-     * @return void
-     * @since  ver 1.0.0
-     *
-     * @author Caspar Green
-     */
-    public function testPrintsPDOExceptionMessageWhenCannotConnect()
-    {
-        ob_start();
-
-        $connection = new MySQLDatabase(
-            'bad_host',
-            'bad_db_name',
-            'bad_username',
-            'bad_password'
-        );
-
-        $message = ob_get_clean();
-
-        $this->assertStringContainsString(
-            'Connection error: ',
-            $message,
-            'PDO Exception message not printed.'
-        );
-    }
-
-    /**
      * Test getConnection() returns a PDO.
      *
      * @return void
@@ -219,6 +191,29 @@ class MySQLDatabaseTest extends TestCase
     }
 
     /**
+     * Test delete() deletes the indicated record.
+     *
+     * @return void
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
+    public function testDeleteDeletesIndicatedRecord()
+    {
+        $this->createMembershipStatusesTable();
+        $this->insertMembershipStatusRecord();
+
+        self::$database->delete('membershipstatuses', 1);
+
+        $getTableContentsQuery = "SELECT * FROM membershipstatuses";
+        $statment = self::$testConn->prepare($getTableContentsQuery);
+        $statment->execute();
+        $contents = $statment->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertEmpty($contents);
+    }
+
+    /**
      * Create a membershipstatuses table in the test database.
      *
      * @return void
@@ -228,20 +223,15 @@ class MySQLDatabaseTest extends TestCase
      */
     private function createMembershipStatusesTable()
     {
-        try {
-            $createMemberStatusesTableQuery = "CREATE TABLE `membershipstatuses` (
+        $createMemberStatusesTableQuery = "CREATE TABLE `membershipstatuses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
   `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
-            $statement = self::$testConn->prepare($createMemberStatusesTableQuery);
-            $statement->execute();
-
-        } catch (PDOException $e) {
-            die('Read Table Test Error: ' . $e->getMessage());
-        }
+        $statement = self::$testConn->prepare($createMemberStatusesTableQuery);
+        $statement->execute();
     }
 
     /**
@@ -254,15 +244,11 @@ class MySQLDatabaseTest extends TestCase
      */
     private function insertMembershipStatusRecord()
     {
-        try {
-            $name = 'Visitor';
-            $insertMemberStatusesQuery = "INSERT into membershipstatuses SET name=:name";
-            $statement = self::$testConn->prepare($insertMemberStatusesQuery);
-            $statement->bindParam(":name", $name);
-            $statement->execute();
-        } catch (PDOException $e) {
-            die('Read Table Test Error: ' . $e->getMessage());
-        }
+        $name = 'Visitor';
+        $insertMemberStatusesQuery = "INSERT into membershipstatuses SET name=:name";
+        $statement = self::$testConn->prepare($insertMemberStatusesQuery);
+        $statement->bindParam(":name", $name);
+        $statement->execute();
     }
 
     /**
@@ -275,12 +261,8 @@ class MySQLDatabaseTest extends TestCase
      */
     private function cleanUpMembershipStatuses()
     {
-        try {
-            $resetDatabaseQuery = "DROP TABLE membershipstatuses";
-            $statement = self::$testConn->prepare($resetDatabaseQuery);
-            $statement->execute();
-        } catch (PDOException $e) {
-            die('Test DB Cleanup Error: ' . $e->getMessage());
-        }
+        $resetDatabaseQuery = "DROP TABLE membershipstatuses";
+        $statement = self::$testConn->prepare($resetDatabaseQuery);
+        $statement->execute();
     }
 }

@@ -10,7 +10,6 @@
 namespace ChurchRoster\Db;
 
 use PDO;
-use PDOException;
 
 /**
  * MySQL Database Connection class.
@@ -29,15 +28,11 @@ class MySQLDatabase implements Database
 
     public function __construct(string $hostname, string $dbName, string $user, string $password)
     {
-        try {
-            $this->connection = new PDO(
-                "mysql:host={$hostname};dbname={$dbName}",
-                $user,
-                $password
-            );
-        } catch (PDOException $exception) {
-            echo "Connection error: " . $exception->getMessage();
-        }
+        $this->connection = new PDO(
+            "mysql:host={$hostname};dbname={$dbName}",
+            $user,
+            $password
+        );
     }
 
     /**
@@ -75,27 +70,6 @@ class MySQLDatabase implements Database
         }
 
         return $statement->execute();
-    }
-
-    /**
-     * Get a dataset query template for a set of columns.
-     *
-     * @param array $columns Data columns for the query.
-     *
-     * @return string The dataset template string.
-     * @author Caspar Green
-     * @since  ver 1.0.0
-     *
-     */
-    protected function getDataSetTemplate(array $columns): string
-    {
-        $dataSetTemplate = '';
-
-        foreach ($columns as $header => $value) {
-            $dataSetTemplate .= "{$header}=:{$header}, ";
-        }
-
-        return trim($dataSetTemplate, ', ');
     }
 
     /**
@@ -145,5 +119,47 @@ class MySQLDatabase implements Database
         $statement->bindParam(':id', $id);
 
         return $statement->execute();
+    }
+
+    /**
+     * Delete a record.
+     *
+     * @param string $table The table to delete from.
+     * @param int $id The record ID to delete.
+     *
+     * @return bool
+     * @since  ver 1.0.0
+     *
+     * @author Caspar Green
+     */
+    public function delete(string $table, int $id): bool
+    {
+        /** @noinspection SqlResolve */
+        $query = "DELETE FROM {$table} WHERE id = ?";
+        $statement = $this->connection->prepare($query);
+        $statement->bindParam(1, $id);
+
+        return $statement->execute();
+    }
+
+    /**
+     * Get a dataset query template for a set of columns.
+     *
+     * @param array $columns Data columns for the query.
+     *
+     * @return string The dataset template string.
+     * @author Caspar Green
+     * @since  ver 1.0.0
+     *
+     */
+    protected function getDataSetTemplate(array $columns): string
+    {
+        $dataSetTemplate = '';
+
+        foreach ($columns as $header => $value) {
+            $dataSetTemplate .= "{$header}=:{$header}, ";
+        }
+
+        return trim($dataSetTemplate, ', ');
     }
 }
