@@ -10,7 +10,7 @@
 namespace ChurchRoster\Db;
 
 /**
- * Interface DbConnection
+ * Interface DbConnection.
  * @package ChurchRoster\Db
  */
 interface Database
@@ -18,6 +18,8 @@ interface Database
     /**
      * Insert a record.
      *
+     * @param string $table Table to insert into.
+     * @param array $columns Data to insert.
      * @return bool
      * @since  ver 1.0.0
      *
