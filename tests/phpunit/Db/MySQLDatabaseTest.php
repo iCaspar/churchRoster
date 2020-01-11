@@ -17,22 +17,16 @@ use PDOException;
 class MySQLDatabaseTest extends TestCase
 {
     /**
-     * Test DB credentials.
-     * @var array
-     */
-    private static $creds;
-
-    /**
      * DB Connection for configuring tests.
      * @var PDO
      */
-    private static $testConn;
+    private static ?PDO $testConn;
 
     /**
      * MySQLDatabase object to test.
      * @var MySQLDatabase
      */
-    private static $database;
+    private static ?MySQLDatabase $database;
 
     /**
      * Set up before running tests.
@@ -44,8 +38,10 @@ class MySQLDatabaseTest extends TestCase
      */
     public static function setUpBeforeClass(): void
     {
-        $creds = include 'tests/phpunit/.env/testenv.php';
-        self::$creds = $creds;
+        $creds['test_db_host_name'] = getenv('DB_HOST');
+        $creds['test_db_name']      = getenv('DB_NAME');
+        $creds['test_db_user']      = getenv('DB_USER');
+        $creds['test_db_pass']      = getenv('DB_PASS');
 
         try {
             self::$testConn = new PDO(
@@ -55,12 +51,11 @@ class MySQLDatabaseTest extends TestCase
             );
 
             self::$database = new MySQLDatabase(
-                self::$creds['test_db_host_name'],
-                self::$creds['test_db_name'],
-                self::$creds['test_db_user'],
-                self::$creds['test_db_pass']
+                $creds['test_db_host_name'],
+                $creds['test_db_name'],
+                $creds['test_db_user'],
+                $creds['test_db_pass']
             );
-
         } catch (PDOException $e) {
             die('Error: ' . $e->getMessage());
         }
@@ -77,7 +72,7 @@ class MySQLDatabaseTest extends TestCase
     public static function tearDownAfterClass(): void
     {
         $dropAllQuery = "DROP TABLE *";
-        $statement = self::$testConn->prepare($dropAllQuery);
+        $statement    = self::$testConn->prepare($dropAllQuery);
         $statement->execute();
 
         self::$testConn = null;
@@ -123,7 +118,7 @@ class MySQLDatabaseTest extends TestCase
         );
 
         $getMembershipstatusestableContentsQuery = "SELECT * FROM membershipstatuses";
-        $statement = self::$testConn->prepare($getMembershipstatusestableContentsQuery);
+        $statement                               = self::$testConn->prepare($getMembershipstatusestableContentsQuery);
         $statement->execute();
 
         $row = $statement->fetch(PDO::FETCH_ASSOC);
@@ -181,7 +176,7 @@ class MySQLDatabaseTest extends TestCase
         );
 
         $getRecordQuery = "SELECT * FROM membershipstatuses";
-        $statement = self::$testConn->prepare($getRecordQuery);
+        $statement      = self::$testConn->prepare($getRecordQuery);
         $statement->execute();
         $testRecord = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -206,7 +201,7 @@ class MySQLDatabaseTest extends TestCase
         self::$database->delete('membershipstatuses', 1);
 
         $getTableContentsQuery = "SELECT * FROM membershipstatuses";
-        $statment = self::$testConn->prepare($getTableContentsQuery);
+        $statment              = self::$testConn->prepare($getTableContentsQuery);
         $statment->execute();
         $contents = $statment->fetch(PDO::FETCH_ASSOC);
 
@@ -244,9 +239,9 @@ class MySQLDatabaseTest extends TestCase
      */
     private function insertMembershipStatusRecord()
     {
-        $name = 'Visitor';
+        $name                      = 'Visitor';
         $insertMemberStatusesQuery = "INSERT into membershipstatuses SET name=:name";
-        $statement = self::$testConn->prepare($insertMemberStatusesQuery);
+        $statement                 = self::$testConn->prepare($insertMemberStatusesQuery);
         $statement->bindParam(":name", $name);
         $statement->execute();
     }
@@ -262,7 +257,7 @@ class MySQLDatabaseTest extends TestCase
     private function cleanUpMembershipStatuses()
     {
         $resetDatabaseQuery = "DROP TABLE membershipstatuses";
-        $statement = self::$testConn->prepare($resetDatabaseQuery);
+        $statement          = self::$testConn->prepare($resetDatabaseQuery);
         $statement->execute();
     }
 }

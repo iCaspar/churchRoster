@@ -7,17 +7,19 @@
  */
 
 use ChurchRoster\Db\MySQLDatabase;
+use Dotenv\Dotenv;
 
 require_once 'vendor/autoload.php';
 
-$dbCreds = include('.env/env.php');
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 try {
     $database = new MySQLDatabase(
-        $dbCreds['host_name'],
-        $dbCreds['db_name'],
-        $dbCreds['db_user'],
-        $dbCreds['db_pass']
+        getenv('DB_HOST'),
+        getenv('DB_NAME'),
+        getenv('DB_USER'),
+        getenv('DB_PASS')
     );
 } catch (PDOException $exception) {
     echo 'Database Error: ' . $exception->getMessage();
