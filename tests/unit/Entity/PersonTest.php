@@ -6,13 +6,13 @@
 
 namespace ChurchRoster\Entity;
 
+use ChurchRoster\TestCases\EntityTestCase;
 use ChurchRoster\TestTraits\PrivateAccess;
 use Mockery;
 use Mockery\MockInterface;
-use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
-class PersonTest extends TestCase
+class PersonTest extends EntityTestCase
 {
     use PrivateAccess;
 

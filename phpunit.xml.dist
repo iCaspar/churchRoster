@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.3/phpunit.xsd"
 		 backupGlobals="false"
 		 colors="true"
 		 beStrictAboutCoversAnnotation="true"
@@ -15,7 +14,8 @@
 	<testsuites>
 		<testsuite name="unit">
 			<directory suffix=".php">./tests/unit/</directory>
-			<exclude>./tests/phpunit/*/*/fixtures/</exclude>
+			<exclude>./tests/unit/*/*/fixtures/</exclude>
+			<exclude>./tests/unit/TestCases/</exclude>
 		</testsuite>
 	</testsuites>
 

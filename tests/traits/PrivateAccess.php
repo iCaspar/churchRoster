@@ -22,7 +22,7 @@ trait PrivateAccess
      *
      * @since 0.0.1
      */
-    private function getAccessibleProperty(string $class, string $propertyName): ReflectionProperty
+    protected function getAccessibleProperty(string $class, string $propertyName): ReflectionProperty
     {
         $accessibleProperty = new ReflectionProperty($class, $propertyName);
         $accessibleProperty->setAccessible(true);

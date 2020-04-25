@@ -29,6 +29,7 @@
   "autoload-dev": {
     "psr-4": {
       "ChurchRoster\\": "tests/unit/",
+      "ChurchRoster\\TestsCases\\": "tests/unit/TestCases",
       "ChurchRoster\\TestTraits\\": "tests/traits/"
     }
   },
